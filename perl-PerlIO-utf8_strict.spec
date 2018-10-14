@@ -4,16 +4,16 @@
 #
 Name     : perl-PerlIO-utf8_strict
 Version  : 0.007
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.007.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.007.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-utf8-strict-perl/libperlio-utf8-strict-perl_0.007-2.debian.tar.xz
 Summary  : 'Fast and correct UTF-8 IO'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-PerlIO-utf8_strict-lib
-Requires: perl-PerlIO-utf8_strict-license
-Requires: perl-PerlIO-utf8_strict-man
+Requires: perl-PerlIO-utf8_strict-lib = %{version}-%{release}
+Requires: perl-PerlIO-utf8_strict-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(Sub::Uplevel)
 BuildRequires : perl(Test::Exception)
 
@@ -22,10 +22,20 @@ This archive contains the distribution PerlIO-utf8_strict,
 version 0.007:
 Fast and correct UTF-8 IO
 
+%package dev
+Summary: dev components for the perl-PerlIO-utf8_strict package.
+Group: Development
+Requires: perl-PerlIO-utf8_strict-lib = %{version}-%{release}
+Provides: perl-PerlIO-utf8_strict-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-PerlIO-utf8_strict package.
+
+
 %package lib
 Summary: lib components for the perl-PerlIO-utf8_strict package.
 Group: Libraries
-Requires: perl-PerlIO-utf8_strict-license
+Requires: perl-PerlIO-utf8_strict-license = %{version}-%{release}
 
 %description lib
 lib components for the perl-PerlIO-utf8_strict package.
@@ -39,19 +49,11 @@ Group: Default
 license components for the perl-PerlIO-utf8_strict package.
 
 
-%package man
-Summary: man components for the perl-PerlIO-utf8_strict package.
-Group: Default
-
-%description man
-man components for the perl-PerlIO-utf8_strict package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n PerlIO-utf8_strict-0.007
-mkdir -p %{_topdir}/BUILD/PerlIO-utf8_strict-0.007/deblicense/
+cd ..
+%setup -q -T -D -n PerlIO-utf8_strict-0.007 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/PerlIO-utf8_strict-0.007/deblicense/
 
 %build
@@ -76,12 +78,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-PerlIO-utf8_strict
-cp LICENSE %{buildroot}/usr/share/doc/perl-PerlIO-utf8_strict/LICENSE
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-PerlIO-utf8_strict
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-PerlIO-utf8_strict/LICENSE
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -90,16 +92,16 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/PerlIO/utf8_strict.pm
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/PerlIO/utf8_strict.pm
+
+%files dev
+%defattr(-,root,root,-)
+/usr/share/man/man3/PerlIO::utf8_strict.3
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/auto/PerlIO/utf8_strict/utf8_strict.so
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/auto/PerlIO/utf8_strict/utf8_strict.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-PerlIO-utf8_strict/LICENSE
-
-%files man
-%defattr(-,root,root,-)
-/usr/share/man/man3/PerlIO::utf8_strict.3
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-PerlIO-utf8_strict/LICENSE

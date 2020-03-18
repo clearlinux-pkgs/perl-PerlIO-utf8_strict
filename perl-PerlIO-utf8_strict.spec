@@ -4,7 +4,7 @@
 #
 Name     : perl-PerlIO-utf8_strict
 Version  : 0.007
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.007.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.007.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-utf8-strict-perl/libperlio-utf8-strict-perl_0.007-2.debian.tar.xz
@@ -104,5 +104,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/PerlIO/utf8_strict.pm
-/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/auto/PerlIO/utf8_strict/utf8_strict.so
+/usr/lib/perl5/vendor_perl/5.30.2/x86_64-linux-thread-multi/PerlIO/utf8_strict.pm
+/usr/lib/perl5/vendor_perl/5.30.2/x86_64-linux-thread-multi/auto/PerlIO/utf8_strict/utf8_strict.so

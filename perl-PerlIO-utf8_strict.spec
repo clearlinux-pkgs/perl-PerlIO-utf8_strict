@@ -104,5 +104,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.32.1/x86_64-linux-thread-multi/PerlIO/utf8_strict.pm
-/usr/lib/perl5/vendor_perl/5.32.1/x86_64-linux-thread-multi/auto/PerlIO/utf8_strict/utf8_strict.so
+/usr/lib/perl5/vendor_perl/5.34.0/x86_64-linux-thread-multi/PerlIO/utf8_strict.pm
+/usr/lib/perl5/vendor_perl/5.34.0/x86_64-linux-thread-multi/auto/PerlIO/utf8_strict/utf8_strict.so

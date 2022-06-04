@@ -4,13 +4,14 @@
 #
 Name     : perl-PerlIO-utf8_strict
 Version  : 0.009
-Release  : 21
+Release  : 22
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-utf8-strict-perl/libperlio-utf8-strict-perl_0.007-2.debian.tar.xz
 Summary  : 'Fast and correct UTF-8 IO'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-PerlIO-utf8_strict-license = %{version}-%{release}
 Requires: perl-PerlIO-utf8_strict-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Sub::Uplevel)
@@ -29,6 +30,14 @@ Requires: perl-PerlIO-utf8_strict = %{version}-%{release}
 
 %description dev
 dev components for the perl-PerlIO-utf8_strict package.
+
+
+%package license
+Summary: license components for the perl-PerlIO-utf8_strict package.
+Group: Default
+
+%description license
+license components for the perl-PerlIO-utf8_strict package.
 
 
 %package perl
@@ -70,6 +79,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-PerlIO-utf8_strict
+cp %{_builddir}/PerlIO-utf8_strict-0.009/LICENSE %{buildroot}/usr/share/package-licenses/perl-PerlIO-utf8_strict/8f053a2dacee0e891a03be98ca05fd2fffba2632
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -87,7 +98,10 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %defattr(-,root,root,-)
 /usr/share/man/man3/PerlIO::utf8_strict.3
 
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-PerlIO-utf8_strict/8f053a2dacee0e891a03be98ca05fd2fffba2632
+
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/x86_64-linux-thread-multi/PerlIO/utf8_strict.pm
-/usr/lib/perl5/vendor_perl/5.34.0/x86_64-linux-thread-multi/auto/PerlIO/utf8_strict/utf8_strict.so
+/usr/lib/perl5/*

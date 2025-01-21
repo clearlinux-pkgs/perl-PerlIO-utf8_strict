@@ -4,7 +4,7 @@
 #
 Name     : perl-PerlIO-utf8_strict
 Version  : 0.010
-Release  : 32
+Release  : 33
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.010.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.010.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-utf8-strict-perl/libperlio-utf8-strict-perl_0.007-2.debian.tar.xz
